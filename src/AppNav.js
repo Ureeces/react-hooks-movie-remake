@@ -27,6 +27,12 @@ const AppNav = () => {
       const data = await response.json();
 
       console.log(data);
+
+      if (!data.Error) {
+        setIsFetching(true);
+        setMovieResults(data.Search);
+      }
+      
     } catch (e) {}
   };
 

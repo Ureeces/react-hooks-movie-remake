@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
+import SearchList from "./SearchList";
 
 import "./Search.css";
 
 const Search = () => {
-  const { searchValue, fetchMovieList } = useContext(SearchContext);
+  const { searchValue, isFetching, movieResults, fetchMovieList } = useContext(
+    SearchContext
+  );
 
   return (
     <div className="search">
@@ -13,6 +16,12 @@ const Search = () => {
         value={searchValue}
         onChange={(e) => fetchMovieList(e.target.value)}
       />
+
+      {searchValue !== "" && isFetching && (
+        <SearchContext.Provider value={{ movieResults }}>
+          <SearchList />
+        </SearchContext.Provider>
+      )}
     </div>
   );
 };
